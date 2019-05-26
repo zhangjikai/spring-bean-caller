@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * Created on 2019-04-07
  */
 @Component
-public class BeanCreator implements ApplicationContextAware {
+public class BeanContext implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
@@ -19,7 +19,7 @@ public class BeanCreator implements ApplicationContextAware {
         applicationContext = ac;
     }
 
-    public static <T> T create(Class<T> clazz) {
+    public static <T> T get(Class<T> clazz) {
         return applicationContext.getBean(clazz);
     }
 }

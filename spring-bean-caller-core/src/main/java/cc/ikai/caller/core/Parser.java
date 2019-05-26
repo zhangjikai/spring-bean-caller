@@ -1,12 +1,15 @@
 package cc.ikai.caller.core;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -16,29 +19,35 @@ import org.slf4j.LoggerFactory;
 public class Parser {
     private static final Logger logger = LoggerFactory.getLogger(Parser.class);
 
-    public static void parseRequest(Map<String, Object> requestMap) {
-
-    }
-
-    public static void parseClass(String className, String methodName) {
+    @Nullable
+    public static Method parse(String className, String methodName, Map<String, Object> paramsMap) {
         Class clazz = getClass(className);
         Method[] methods = clazz.getDeclaredMethods();
-        for(Method m : methods) {
-            if (StringUtils.equals(methodName, m.getName())) {
-                Parameter[] parameters = m.getParameters();
-                for(Parameter p: parameters) {
-                    System.out.println(p.getName());
-                }
-                logger.info("parameters {}", parameters);
-            }
+        return Arrays.stream(methods)
+                .filter(m -> StringUtils.equals(methodName, m.getName()))
+                .filter(m -> isTargetMethod(m, paramsMap))
+                .findFirst()
+                .orElse(null);
+    }
+    
+    /**
+     * 如果两个方法含有相同的参数名和个数，返回第一个匹配的
+     */
+    private static boolean isTargetMethod(Method m, Map<String, Object> paramsMap) {
+        Parameter[] parameters = m.getParameters();
+        if (parameters.length != paramsMap.size()) {
+            return false;
         }
+        Set<String> paramNameSet = paramsMap.keySet();
+        return Arrays.stream(parameters).map(Parameter::getName).allMatch(paramNameSet::contains);
     }
 
-    private static Class getClass(String className) {
+    public static Class getClass(String className) {
         try {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            logger.error("", e);
+            throw new RuntimeException("Class not found: " + className);
         }
     }
 }
