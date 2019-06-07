@@ -1,4 +1,4 @@
-package cc.ikai.caller.web.service;
+package ikai.caller.web.service;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;

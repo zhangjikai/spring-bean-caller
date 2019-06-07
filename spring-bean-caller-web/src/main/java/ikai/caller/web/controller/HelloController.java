@@ -1,4 +1,4 @@
-package cc.ikai.caller.web.controller;
+package ikai.caller.web.controller;
 
 import cc.ikai.caller.core.Caller;
 import org.springframework.beans.factory.annotation.Autowired;
