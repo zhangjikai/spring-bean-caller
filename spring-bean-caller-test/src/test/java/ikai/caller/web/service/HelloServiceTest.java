@@ -1,7 +1,9 @@
 package ikai.caller.web.service;
 
 import cc.ikai.caller.core.Caller;
+import com.alibaba.fastjson.JSON;
 import ikai.caller.web.Application;
+import ikai.caller.web.service.HelloService.Product;
 import ikai.caller.web.service.HelloService.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,13 +68,40 @@ public class HelloServiceTest {
     }
     
     @Test
+    public void testListParam() {
+        Map<String, Object> paramsMap = new HashMap<>();
+        paramsMap.put("list", JSON.parse("['1', '2', '3']"));
+        requestMap.put("params", paramsMap);
+        assertEquals(paramsMap.get("list").toString(), caller.doCall(requestMap));
+    }
+    
+    @Test
     public void testObjectParam() {
         Map<String, Object> paramsMap = new HashMap<>();
-        User user = new User();
-        user.setName("a");
-        user.setAge(20);
-        paramsMap.put("user", user);
+        Map<String, Object> testMap = new HashMap<>();
+        testMap.put("name", "aaa");
+        testMap.put("age", 20);
+        paramsMap.put("user", testMap);
         requestMap.put("params", paramsMap);
+        User user = new User();
+        user.setName("aaa");
+        user.setAge(20);
         assertEquals(user.toString(), caller.doCall(requestMap));
+    }
+    
+    @Test
+    public void testBuilderObjectParam() {
+        Map<String, Object> paramsMap = new HashMap<>();
+        Map<String, Object> testMap = new HashMap<>();
+        testMap.put("name", "aaa");
+        testMap.put("price", 10.01);
+        paramsMap.put("product", testMap);
+        requestMap.put("params", paramsMap);
+        requestMap.put("directSetFiledForObjectParam", true);
+        Product product = Product.newBuilder()
+                .setName("aaa")
+                .setPrice(10.01)
+                .build();
+        assertEquals(product.toString(), caller.doCall(requestMap));
     }
 }
