@@ -1,14 +1,15 @@
 package ikai.caller.web.service;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+import static com.alibaba.fastjson.JSON.toJSONString;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
 
 /**
  * @author zhangjikai
@@ -19,22 +20,22 @@ public class HelloService {
     private final Logger logger = LoggerFactory.getLogger(HelloService.class);
     
     public String sayHello(String s) {
-        return "hello: " + s;
+        return s;
     }
 
     public String sayHello(Map<String, Object> map) {
         logger.info("map: {}", map);
-        return "hello: " + map;
+        return toJSONString(map);
     }
 
     public String sayHello(String[] texts) {
         logger.info("texts: {}", reflectionToString(texts, SHORT_PREFIX_STYLE));
-        return "hello: " + reflectionToString(texts, SHORT_PREFIX_STYLE);
+        return toJSONString(texts);
     }
     
     public String sayHello(User user) {
         logger.info("user {}", user);
-        return "hello: " + user;
+        return user.toString();
     }
     
     public static class User {
@@ -59,7 +60,7 @@ public class HelloService {
     
         @Override
         public String toString() {
-            return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+            return reflectionToString(this, SHORT_PREFIX_STYLE);
         }
     }
 }
