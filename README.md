@@ -1,2 +1,4 @@
 # spring-bean-caller
-Dynamic call spring bean.
+Dynamic call spring bean's method through http api.
+
+![](screenshot/demo.PNG)
