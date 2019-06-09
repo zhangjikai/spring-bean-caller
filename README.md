@@ -84,7 +84,7 @@ public class HelpController {
 * className - The full bean class name.
 * methodName - The calling method name.
 * params - The calling method parameters.
-* directSetFiledForObjectParam - If this set true, the method custom object parameter will set filed directly install of using the setter method. If your parameters have builder pattern object, you should set this true. Default is false.
+* directSetFiledForObjectParam - If this set true, the object parameter will set filed directly instead of using the setter method. If your parameters have builder pattern object, you should set this true. Default is false.
 
 ## More examples
 You can see more examples in [spring-bean-caller-test](https://github.com/zhangjikai/spring-bean-caller-test)
