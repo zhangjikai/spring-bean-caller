@@ -2,13 +2,13 @@
 Dynamic call spring bean's method through http api.
 
 ## What is spring-bean-caller
-Spring-bean-caller is a helpful tool that debugging your spring application. It allows you calling your method through http api.
+Spring-bean-caller is a helpful tool that debugging your spring application. It allows you calling your method through http api directly.
 
 ## Requirements
 Jdk.version >= 1.8
 
 ## How to use it
-* Add dependency to you project
+* Add dependency to your project
 ```xml
 <dependency>
   <groupId>cc.ikai.tool</groupId>
