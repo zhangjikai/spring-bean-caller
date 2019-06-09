@@ -47,6 +47,7 @@ Jdk.version >= 1.8
 public class HelpController {
     @Autowired
     private Caller caller;
+    
     @RequestMapping("invoke")
     public Map<String, Object> invoke(@RequestBody Map<String, Object> requestMap) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -60,6 +61,7 @@ public class HelpController {
     - Suppose you have a service like below:
     ```java 
     package ikai.caller.web.service;
+    
     @Service
     public class HelloService { 
         public String sayHello(String s) {
