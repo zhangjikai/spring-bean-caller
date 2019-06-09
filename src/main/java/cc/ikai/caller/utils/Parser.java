@@ -30,9 +30,8 @@ public class Parser {
                 .orElse(null);
     }
     
-    /**
-     * 如果两个方法含有相同的参数名和个数，返回第一个匹配的
-     */
+    
+    // 如果两个方法含有相同的参数名和个数，返回第一个匹配的
     private static boolean isTargetMethod(Method m, Map<String, Object> paramsMap) {
         Parameter[] parameters = m.getParameters();
         if (parameters.length != paramsMap.size()) {
