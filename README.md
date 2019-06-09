@@ -70,12 +70,12 @@ public class HelpController {
     - And you can call this method using the following json parameter through `invoke` api.
     ```json
     {
-    	"className" : "ikai.caller.web.service.HelloService",
-    	"methodName": "sayHello",
-    	"params": {
-    		"s": "aaa" 
-    	}
-    }    
+        "className": "ikai.caller.web.service.HelloService",
+        "methodName": "sayHello",
+        "params": {
+            "s": "aaa"
+        }
+    } 
     ```
     - The result like below.
     ![](screenshot/demo.png)
