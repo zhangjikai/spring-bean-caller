@@ -1,5 +1,14 @@
-# spring-bean-caller
-Dynamic call spring bean's method through http api.
+# Spring-bean-caller
+
+<!-- toc -->
+
+- [What is spring-bean-caller](#what-is-spring-bean-caller)
+- [Requirements](#requirements)
+- [How to use it](#how-to-use-it)
+- [Input json property description](#input-json-property-description)
+- [More examples](#more-examples)
+
+<!-- tocstop -->
 
 ## What is spring-bean-caller
 Spring-bean-caller is a helpful tool that debugging your spring application. It allows you calling your method through http api directly.
