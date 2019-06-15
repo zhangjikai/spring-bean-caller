@@ -55,10 +55,13 @@ public class Caller {
     @SuppressWarnings("unchecked")
     private Object getConvertedParam(Parameter p, Map<String, Object> paramsMap, boolean isDirectSetField) {
         Object rawValue = paramsMap.get(p.getName());
+        Class paramClass = p.getType();
+        if (isEnumParam(paramClass)) {
+            return Enum.valueOf(paramClass, Objects.toString(paramsMap.get(p.getName())));
+        }
         if (!(rawValue instanceof Map)) {
             return convert(rawValue, p.getType());
         }
-        Class paramClass = p.getType();
         if (isCollectionParam(paramClass) || !isDirectSetField) {
             return parseObject(toJSONString(rawValue), p.getType());
         }
@@ -68,5 +71,9 @@ public class Caller {
     
     private boolean isCollectionParam(Class paramClass) {
         return Map.class.isAssignableFrom(paramClass) || Collection.class.isAssignableFrom(paramClass);
+    }
+    
+    private boolean isEnumParam(Class paramClass) {
+        return paramClass.isEnum();
     }
 }

@@ -14,7 +14,7 @@
     <groupId>cc.ikai.tool</groupId>
     <artifactId>spring-bean-caller</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <name>spring-bean-caller</name>
     <description>Dynamic calling spring bean's method.</description>
