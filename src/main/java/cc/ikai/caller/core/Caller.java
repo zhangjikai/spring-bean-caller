@@ -2,6 +2,8 @@ package cc.ikai.caller.core;
 
 import cc.ikai.caller.utils.Parser;
 import cc.ikai.caller.utils.ReflectionUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.util.JsonFormat;
@@ -59,7 +61,7 @@ public class Caller {
         Object returnObject = method.invoke(targetBean, args);
         Class returnType = method.getReturnType();
         if (isProtoReturnValue(returnType)) {
-            return JsonFormat.printer().includingDefaultValueFields().print((MessageOrBuilder) returnObject);
+            return JSON.parseObject(JsonFormat.printer().includingDefaultValueFields().print((MessageOrBuilder) returnObject));
         }
         return returnObject;
     }
